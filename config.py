@@ -39,24 +39,24 @@ class Config:
     MAP_DIMS = (MAP_DIMX, MAP_DIMY)
 
     #TOWERS
-    BTOWER_IMAGE_small = "imagens/lue.png"
-    BTOWER_IMAGE_big = "imagens/lue-grande.png"
-    BTOWER_WIDTH = 32
-    BTOWER_HEIGHT = 32
-    BTOWER_RANGE = 64
-    BTOWER_DAMAGE = 50
-    BTOWER_FIRERATE = 1.0
-    BTOWER_PRICE = 100
-    BTOWER_BUYER_POS = (567, 13)
-    CTOWER_IMAGE_small = "imagens/sic.png"
-    CTOWER_IMAGE_big = "imagens/sic-grande.png"
-    CTOWER_WIDTH = 32
-    CTOWER_HEIGHT = 32
-    CTOWER_RANGE = 96
-    CTOWER_DAMAGE = 25
-    CTOWER_FIRERATE = 0.9
-    CTOWER_PRICE = 50
-    CTOWER_BUYER_POS = (493, 13)
+    BLUETOWER_IMAGE_small = "imagens/lue.png"
+    BLUETOWER_IMAGE_big = "imagens/lue-grande.png"
+    BLUETOWER_WIDTH = 32
+    BLUETOWER_HEIGHT = 32
+    BLUETOWER_RANGE = 64
+    BLUETOWER_DAMAGE = 50
+    BLUETOWER_FIRERATE = 1.0
+    BLUETOWER_PRICE = 100
+    BLUETOWER_BUYER_POS = (567, 13)
+    CLASSICTOWER_IMAGE_small = "imagens/sic.png"
+    CLASSICTOWER_IMAGE_big = "imagens/sic-grande.png"
+    CLASSICTOWER_WIDTH = 32
+    CLASSICTOWER_HEIGHT = 32
+    CLASSICTOWER_RANGE = 96
+    CLASSICTOWER_DAMAGE = 25
+    CLASSICTOWER_FIRERATE = 1.0
+    CLASSICTOWER_PRICE = 50
+    CLASSICTOWER_BUYER_POS = (493, 13)
 
     #TRAPS
     FIRETRAP_IMAGE = "imagens/firetrap3.png"
