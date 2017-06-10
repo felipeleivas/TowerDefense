@@ -28,8 +28,8 @@ class TowerDefense:
         self.inicializeMatrix()
         self._rectMap = map.Map(config.Config.MAP_DIMS, config.Config.RECT_DIMS_px, self._matrix)
         self._towerMenuBackground = pygame.image.load(config.Config.MENUTOWERS_IMAGE)
-        self._buyingTowers = [towers.ClassicTowerBuyer(config.Config.CTOWER_BUYER_POS),
-                              towers.BlueTowerBuyer(config.Config.BTOWER_BUYER_POS)]
+        self._buyingTowers = [towers.ClassicTowerBuyer(config.Config.CLASSICTOWER_BUYER_POS),
+                              towers.BlueTowerBuyer(config.Config.BLUETOWER_BUYER_POS)]
         self._buyingTraps = [traps.FireTrapBuyer(config.Config.FIRETRAP_BUYER_POS),
                              traps.IceTrapBuyer(config.Config.ICETRAP_BUYER_POS)]
         self._FPS = False
@@ -147,7 +147,7 @@ class TowerDefense:
     def mousePress(self, mousePosition, gameDisplay):
 
         if self.isPurchasingTower():
-            if self.isInsideRect(mousePosition):
+            if self.isInsideRect(mousePosition): #EFEITO COLATERAL - arrumar
                 newTower = self.selectedObject
                 newTower.setPosition(self.getRectMap().getMap()[self.I][self.J][1].getPosition())
                 newTowerColliding = False
@@ -176,13 +176,11 @@ class TowerDefense:
                 for trapAux in self.getTraps():
                     if trapAux.collide(newTrap):
                         newTrapColliding = True
-                print newTrapColliding
                 if not newTrapColliding:
                     if self.isInsideCentralPath(newTrap):
                         newTrapColliding = False
                     else:
                         newTrapColliding = True
-                print newTrapColliding
                 if not newTrapColliding:
                     if self._player.haveCashToBuy(newTrap.getPrice()):
                         self.addTrap(newTrap)
@@ -195,15 +193,15 @@ class TowerDefense:
                         self.turnOffPurchasingTrap()
                         self.paintHaveNoCashMess(gameDisplay, mousePosition)
                         self._timer = 3
-        elif self.isInsideBuying(mousePosition): #EFEITO COLATERAL
-            if self.selectedObject.getFirstClass() == "Tower":
-                self.turnOnPurchasingTower()
-            elif self.selectedObject.getFirstClass() == "Trap":
-                self.turnOnPurchasingTrap()
         elif self.isInsideTowerOrTrap(mousePosition):
             self.turnOnClickedInTowerOrTrap()
         elif self.isClickedInTowerOrTrap():
             self.turnOffClickedInTowerOrTrap()
+        elif self.isInsideBuying(mousePosition): #EFEITO COLATERAL - arrumar
+            if self.selectedObject.getFirstClass() == "Tower":
+                self.turnOnPurchasingTower()
+            elif self.selectedObject.getFirstClass() == "Trap":
+                self.turnOnPurchasingTrap()
 
     def isInsideRect(self, mousePosition):
         for i in range(0, self.getRectMap().getDimension()[0]):
@@ -276,9 +274,7 @@ class TowerDefense:
                 if rectID == config.Config.MAP_NUMBMATRIX_CENTRALPATH\
                         or rectID == config.Config.MAP_NUMBMATRIX_CHANGEDIRECTION:
                     if rectMap[i][j][1].collide(object):
-                        print "retornando True"
                         return True
-        print "retornando False"
         return False
 
     def paintAllStuff(self, gameDisplay, mousePosition):
@@ -291,7 +287,7 @@ class TowerDefense:
             self.executePurchasingTrap(gameDisplay, mousePosition)
         self.paintTowerMenuBackground(gameDisplay)
         if self.isClickedInTowerOrTrap():
-            self.executeClickedInTower(gameDisplay)
+            self.executeClickedInTowerOrTrap(gameDisplay)
         self.paintBuyingTowers(gameDisplay)
         self.paintBuyingTraps(gameDisplay)
         self.paintCash(gameDisplay)

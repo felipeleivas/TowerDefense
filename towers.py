@@ -127,13 +127,13 @@ class Tower(rectangle.Rectangle):
 class ClassicTower(Tower):
     def __init__(self, position):
         super(ClassicTower, self).__init__(position,
-                                           config.Config.CTOWER_WIDTH,
-                                           config.Config.CTOWER_HEIGHT,
-                                           config.Config.CTOWER_IMAGE_small,
-                                           config.Config.CTOWER_RANGE,
-                                           config.Config.CTOWER_DAMAGE,
-                                           config.Config.CTOWER_FIRERATE,
-                                           config.Config.CTOWER_PRICE)
+                                           config.Config.CLASSICTOWER_WIDTH,
+                                           config.Config.CLASSICTOWER_HEIGHT,
+                                           config.Config.CLASSICTOWER_IMAGE_small,
+                                           config.Config.CLASSICTOWER_RANGE,
+                                           config.Config.CLASSICTOWER_DAMAGE,
+                                           config.Config.CLASSICTOWER_FIRERATE,
+                                           config.Config.CLASSICTOWER_PRICE)
 
     def getClass(self):
         return "ClassicTower"
@@ -146,13 +146,13 @@ class ClassicTower(Tower):
 class ClassicTowerBuyer(Tower):
     def __init__(self, position):
         super(ClassicTowerBuyer, self).__init__(position,
-                                                config.Config.CTOWER_WIDTH * 2,
-                                                config.Config.CTOWER_HEIGHT * 2,
-                                                config.Config.CTOWER_IMAGE_big,
-                                                config.Config.CTOWER_RANGE,
-                                                config.Config.CTOWER_DAMAGE,
-                                                config.Config.CTOWER_FIRERATE,
-                                                config.Config.CTOWER_PRICE)
+                                                config.Config.CLASSICTOWER_WIDTH * 2,
+                                                config.Config.CLASSICTOWER_HEIGHT * 2,
+                                                config.Config.CLASSICTOWER_IMAGE_big,
+                                                config.Config.CLASSICTOWER_RANGE,
+                                                config.Config.CLASSICTOWER_DAMAGE,
+                                                config.Config.CLASSICTOWER_FIRERATE,
+                                                config.Config.CLASSICTOWER_PRICE)
 
     def getClass(self):
         return "ClassicTowerBuyer"
@@ -164,13 +164,13 @@ class ClassicTowerBuyer(Tower):
 class BlueTower(Tower):
     def __init__(self, position):
         super(BlueTower, self).__init__(position,
-                                        config.Config.BTOWER_WIDTH,
-                                        config.Config.BTOWER_HEIGHT,
-                                        config.Config.BTOWER_IMAGE_small,
-                                        config.Config.BTOWER_RANGE,
-                                        config.Config.BTOWER_DAMAGE,
-                                        config.Config.BTOWER_FIRERATE,
-                                        config.Config.BTOWER_PRICE)
+                                        config.Config.BLUETOWER_WIDTH,
+                                        config.Config.BLUETOWER_HEIGHT,
+                                        config.Config.BLUETOWER_IMAGE_small,
+                                        config.Config.BLUETOWER_RANGE,
+                                        config.Config.BLUETOWER_DAMAGE,
+                                        config.Config.BLUETOWER_FIRERATE,
+                                        config.Config.BLUETOWER_PRICE)
 
     def getClass(self):
         return "BlueTower"
@@ -182,13 +182,13 @@ class BlueTower(Tower):
 class BlueTowerBuyer(Tower):
     def __init__(self, position):
         super(BlueTowerBuyer, self).__init__(position,
-                                             config.Config.BTOWER_WIDTH * 2,
-                                             config.Config.BTOWER_HEIGHT * 2,
-                                             config.Config.BTOWER_IMAGE_big,
-                                             config.Config.BTOWER_RANGE,
-                                             config.Config.BTOWER_DAMAGE,
-                                             config.Config.BTOWER_FIRERATE,
-                                             config.Config.BTOWER_PRICE)
+                                             config.Config.BLUETOWER_WIDTH * 2,
+                                             config.Config.BLUETOWER_HEIGHT * 2,
+                                             config.Config.BLUETOWER_IMAGE_big,
+                                             config.Config.BLUETOWER_RANGE,
+                                             config.Config.BLUETOWER_DAMAGE,
+                                             config.Config.BLUETOWER_FIRERATE,
+                                             config.Config.BLUETOWER_PRICE)
 
     def getClass(self):
         return "BlueTowerBuyer"

@@ -8,11 +8,6 @@ import config
 # durante a partida, até a hora que o jogador clica no exit.
 class Game:
     def __init__(self):
-
-        """
-
-        :rtype: object
-        """
         self._gameExit = False
         self._noCashTimer = 0
         self._FPS = 0
