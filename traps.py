@@ -9,6 +9,7 @@ class Trap(rectangle.Rectangle):
     def __init__(self, position, width, height, image, damage, price):
         super(Trap, self).__init__(position, width, height, image)
         self._damage = damage
+        self._reloadTime = 1
         self._price = price
 
     def getFirstClass(self):
@@ -20,6 +21,10 @@ class Trap(rectangle.Rectangle):
 
     @abc.abstractmethod
     def newCopy(self):
+        return
+
+    @abc.abstractmethod
+    def specialEffect(self):
         return
 
     def getDamage(self):
@@ -37,14 +42,24 @@ class Trap(rectangle.Rectangle):
     def doublePrice(self):
         self._price = self._price * 2
 
-    def shotEnemies(self, enemies):
-        for enemieAux in enemies:
-            if self.isInside(enemieAux.getPosition()):
-                self.shot(enemieAux)
-                break
+    def decReloadTime(self):
+        self._reloadTime -= 1.0
 
-    def shot(self, enemie):
-        enemie.hit(self._damage)
+    def resetReloadTime(self):
+        self._reloadTime = 1.0
+        #print self._reloadTime
+
+    def shotEnemies(self, enemies, towerDefense):
+        if self._reloadTime <= 0:
+            for enemieAux in enemies:
+                if self.collide(enemieAux):
+                    self.shot(enemieAux, towerDefense)
+                    self.resetReloadTime()
+                    break
+
+    def shot(self, enemie, towerDefense):
+        print("shot")
+        enemie.hit(self._damage, towerDefense)
 
     def paintRange(self, gameDisplay, color):
         self._mouseCircleSurface.fill(config.Config.CK)
@@ -72,6 +87,9 @@ class FireTrap(Trap):
 
     def newCopy(self):
         return FireTrap(self._position)
+
+    def specialEffect(self, enemie):
+        enemie.setBurn(3, 3)
 
 
 class FireTrapBuyer(Trap):

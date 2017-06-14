@@ -319,7 +319,7 @@ class TowerDefense:
             towerAux.shotEnemies(self.getEnemies())
             towerAux.moveShots(gameDisplay, self.getEnemies(), self)
         for trapAux in self.getTraps():
-            trapAux.shotEnemies(self.getEnemies())
+            trapAux.shotEnemies(self.getEnemies(), self)
 
 
     def paintRectMap(self, gameDisplay):
@@ -372,6 +372,9 @@ class TowerDefense:
         self._enemieTimer -= 1
         for towerAux in self.getTowers():
             towerAux.decReloadTime()
+
+        for trapAux in self.getTraps():
+            trapAux.decReloadTime()
 
     #def decTimerDecisegundo(self):
      #   for towerAux in self.getTowers():

@@ -77,7 +77,7 @@ class Config:
     ENEMIE_IMAGE = "imagens/firetrap.png"
     ENEMIE_WIDTH = 16
     ENEMIE_HEIGHT = 16
-    ENEMIE_HEALTH = 20
-    ENEMIE_SPEED = 0.5  # ENTRE 1 E !0
+    ENEMIE_HEALTH = 30
+    ENEMIE_SPEED = 1.0 # ENTRE 1 E !0
     ENEMIE_EARNCASH = 0
     ENEMIE_LIFESWILLTOOK = 0

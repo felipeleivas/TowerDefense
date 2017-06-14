@@ -9,6 +9,7 @@ class Enemie(rectangle.Rectangle):
         self._speed = speed
         self._earnCash = earnCash
         self._lifesWillTook = lifesWillTook
+        self._specialEffects = []
         self._flagSubir = False
         self._flagDescer = False
         self._flagDireita = True
@@ -39,10 +40,14 @@ class Enemie(rectangle.Rectangle):
         self._lifesWillTook = lifesWillTook
 
     def hit(self, damage, towerDefense):
+        print("hit")
         if damage >= self._health:
             self.despawn(towerDefense)
         else:
             self._health = self._health - damage
+
+    def setBurn(self, damage, durationTime):
+        pass
 
     def despawn(self, towerDefense):
         towerDefense.delEnemie(self)

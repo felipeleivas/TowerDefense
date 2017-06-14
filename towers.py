@@ -9,8 +9,7 @@ import shot
 # Classe Tower estende de Rectangle:
 # Essa classe define as Torres do jogo, tanto as que serão postas no mapa,
 # como as que ficam na aba de compras.
-class Tower(rectangle.Rectangle):
-    __metaclass__ = abc.ABCMeta
+class Tower(rectangle.Rectangle, metaclass=abc.ABCMeta):
     _mouseCircleSurface = pygame.Surface(config.Config.MOUSE_CIRCLE_SURFACE)
 
     def __init__(self, position, width, height, image, range, damage, fireRate, price):
