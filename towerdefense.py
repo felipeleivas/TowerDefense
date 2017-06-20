@@ -516,12 +516,3 @@ class TowerDefense:
         self._matrix[11][27] = 1
         self._matrix[11][28] = 1
         self._matrix[11][29] = 1
-
-
-
-
-
-
-
-
-

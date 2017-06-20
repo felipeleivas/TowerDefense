@@ -16,9 +16,11 @@ class Config:
     FPS = 100
     DISPLAY_WIDTH = 800
     DISPLAY_HEIGHT = 480
+    DISPLAY_SIZE = (DISPLAY_WIDTH, DISPLAY_HEIGHT)
     PLAYER_CASH = 400
     PLAYER_LIFE = 50
     MENUTOWERS_IMAGE = "imagens/undo-menu-ingame.png"
+    CREATIONMODE_IMAGE = "imagens/creation_menu.png"
     GRASS_IMAGE = "imagens/grass_outlined.png"
 
     #RECTANGLE
@@ -37,7 +39,12 @@ class Config:
     MAP_DIMX = 30
     MAP_DIMY = 30
     MAP_DIMS = (MAP_DIMX, MAP_DIMY)
-
+    MAP_NUMBMATRIX_VALUES = [MAP_NUMBMATRIX_GRASS,
+                             MAP_NUMBMATRIX_PATH,
+                             MAP_NUMBMATRIX_SPAWN,
+                             MAP_NUMBMATRIX_DESPAWN,
+                             MAP_NUMBMATRIX_CENTRALPATH,
+                             MAP_NUMBMATRIX_CHANGEDIRECTION]
     #TOWERS
     BLUETOWER_IMAGE_small = "imagens/lue.png"
     BLUETOWER_IMAGE_big = "imagens/lue-grande.png"
@@ -74,7 +81,7 @@ class Config:
 
     #ENEMIES
     ENEMIE_SPAWNPOSITION = (0, 160)
-    ENEMIE_IMAGE = "imagens/firetrap.png"
+    ENEMIE_IMAGE = "imagens/enemy.png"
     ENEMIE_WIDTH = 16
     ENEMIE_HEIGHT = 16
     ENEMIE_HEALTH = 30
