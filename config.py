@@ -21,7 +21,22 @@ class Config:
     PLAYER_LIFE = 50
     MENUTOWERS_IMAGE = "imagens/undo-menu-ingame.png"
     CREATIONMODE_IMAGE = "imagens/creation_menu.png"
+    
     GRASS_IMAGE = "imagens/grass_outlined.png"
+    
+    #spawns
+    SPAWN_IMAGE = "imagens/spawn.png"
+    DESPAWN_IMAGE = "imagens/despawn.png"
+
+    #paths
+    CENTRAL_PATH_IMAGE = "imagens/center_path.png"
+    REGULAR_PATH_IMAGE = "imagens/path.png"
+    CHANGEDIR_IMAGE = "imagens/changedir.png"
+
+    #MOUSE
+    LEFT_BUTTON = 1
+    MIDDLE_BUTTON = 2
+    RIGHT_BUTTON = 3
 
     #RECTANGLE
     RECT_DIMX_px = 16
