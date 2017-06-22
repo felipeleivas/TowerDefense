@@ -54,8 +54,21 @@ class TowerDefense:
     def addEnemie(self, newEnemie):
         self._enemiesList.append(newEnemie)
 
+    def squarePosToPixel(self, pos):
+        return (config.Config.RECT_DIMX_px * pos[1], config.Config.RECT_DIMY_px * pos[0]) #TODO: @Vinicius, Can you understand why reversed 0 and 1 ?
+
+    def getEnemySpawnPosition(self):
+        try:
+            for i in range(len(self._matrix)):
+                for j in range(len(self._matrix[0])):
+                    if self._matrix[i][j] == config.Config.MAP_NUMBMATRIX_SPAWN:
+                        return (self.squarePosToPixel([i,j]))
+        except IndexError:
+            print("Failed to acess matrix line")
+            raise
+
     def spawnEnemie(self):
-        self.addEnemie(enemies.Enemie(config.Config.ENEMIE_SPAWNPOSITION,
+        self.addEnemie(enemies.Enemie(self.getEnemySpawnPosition(),
                                       config.Config.ENEMIE_WIDTH,
                                       config.Config.ENEMIE_HEIGHT,
                                       config.Config.ENEMIE_IMAGE,
@@ -384,7 +397,7 @@ class TowerDefense:
         return self._timer
 
     def inicializeMatrix(self):
-        f = open("maps/map1.map")
+        f = open("maps/map3.map")
 
         self._matrix = []
         for line in f.readlines():

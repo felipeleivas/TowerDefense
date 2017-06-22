@@ -3,6 +3,7 @@ import pygame
 import sys
 import map
 import rectangle
+from sys import argv
 
 class MapCreator:
 	def __init__(self):
@@ -66,14 +67,21 @@ class MapCreator:
 
 	def saveMatrix(self):
 		print("Saving map...")
+
+		try:
+			filename = 'maps/' + argv[1]
+		except IndexError:
+			filename = 'maps/map1.map'
+			pass
 		
-		file = open('maps/map1.map', 'w') #TODO: Better saving naming options
+		file = open(filename, 'w') #TODO: Better saving naming options
 
 		for line in self.getMatrix():
 			file.write(str(line)+'\n')
 
 		file.close()
 
+	#TODO: @Otavio -> Tirar as coisas hardcoded
 	def _handleMenuClick(self, pos):
 		if self.getClickedSquare(pos) == None: #ou seja, se nenhum dos quadrados na tela foi apertado...
 			if pos[1] < 372 and pos[1] > 328:

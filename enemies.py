@@ -71,6 +71,9 @@ class Enemie(rectangle.Rectangle):
         mapMatrixPrevRow = mapMatrix[rectPositionI - 1][rectPositionJ]
         mapMatrixPosition = mapMatrix[rectPositionI][rectPositionJ]
 
+        #print(mapMatrixPrevRow) #TODO
+        #print(mapMatrixNextRow)
+
         if mapMatrixNextColumn == config.Config.MAP_NUMBMATRIX_DESPAWN:
             self.despawn(towerDefense)
         else:
@@ -90,6 +93,7 @@ class Enemie(rectangle.Rectangle):
                         self._flagDireita = False
                         self._flagEsquerda = False
             elif self._flagDescer:
+                print("OI")
                 if mapMatrixNextRow == config.Config.MAP_NUMBMATRIX_CENTRALPATH \
                         or mapMatrixNextRow == config.Config.MAP_NUMBMATRIX_CHANGEDIRECTION:
                     self.moveDown()
