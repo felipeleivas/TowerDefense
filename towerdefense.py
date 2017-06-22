@@ -67,6 +67,24 @@ class TowerDefense:
             print("Failed to acess matrix line")
             raise
 
+    def getSpawnPosition(self):
+        for i in range(len(self._matrix)):
+            for j in range(len(self._matrix[0])):
+                if self._matrix[i][j] == config.Config.MAP_NUMBMATRIX_SPAWN:
+                    return i, j
+
+    def getFirstDir(self):
+        spawnPosI, spawnPosJ = self.getSpawnPosition()
+
+        if self._matrix[spawnPosI + 1][spawnPosJ] == config.Config.MAP_NUMBMATRIX_CENTRALPATH:
+            return 'D'
+        elif self._matrix[spawnPosI - 1][spawnPosJ] == config.Config.MAP_NUMBMATRIX_CENTRALPATH:
+            return 'U'
+        elif self._matrix[spawnPosI][spawnPosJ + 1] == config.Config.MAP_NUMBMATRIX_CENTRALPATH:
+            return 'R'
+        elif self._matrix[spawnPosI][spawnPosJ - 1] == config.Config.MAP_NUMBMATRIX_CENTRALPATH:
+            return 'L'
+
     def spawnEnemie(self):
         self.addEnemie(enemies.Enemie(self.getEnemySpawnPosition(),
                                       config.Config.ENEMIE_WIDTH,
@@ -75,7 +93,8 @@ class TowerDefense:
                                       config.Config.ENEMIE_HEALTH,
                                       config.Config.ENEMIE_SPEED,
                                       config.Config.ENEMIE_EARNCASH,
-                                      config.Config.ENEMIE_LIFESWILLTOOK))
+                                      config.Config.ENEMIE_LIFESWILLTOOK,
+                                      self.getFirstDir() ))
         self._enemieTimer = 1
 
     def delEnemie(self, enemie):
@@ -397,7 +416,7 @@ class TowerDefense:
         return self._timer
 
     def inicializeMatrix(self):
-        f = open("maps/map3.map")
+        f = open("maps/map4.map")
 
         self._matrix = []
         for line in f.readlines():

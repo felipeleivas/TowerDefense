@@ -3,7 +3,7 @@ import config
 
 
 class Enemie(rectangle.Rectangle):
-    def __init__(self, position, width, height, image, health, speed, earnCash, lifesWillTook):
+    def __init__(self, position, width, height, image, health, speed, earnCash, lifesWillTook, firstDir):
         super(Enemie, self).__init__(position, width, height, image)
         self._health = health
         self._speed = speed
@@ -12,8 +12,9 @@ class Enemie(rectangle.Rectangle):
         self._specialEffects = []
         self._flagSubir = False
         self._flagDescer = False
-        self._flagDireita = True
+        self._flagDireita = False
         self._flagEsquerda = False
+        self._setInitialFlags(firstDir)
 
     def getHealth(self):
         return self._health
@@ -58,10 +59,27 @@ class Enemie(rectangle.Rectangle):
                 if rectMap.getMap()[i][j][1].isInside(self.getCenter()):
                     return i, j
 
+    def _setInitialFlags(self, firstDir):
+        if firstDir[0] == "U":
+            self._flagSubir = True
+        elif firstDir[0] == "D":
+            self._flagDescer = True
+        elif firstDir[0] == "R":
+            self._flagDireita = True
+        elif firstDir[0] == "L":
+            self._flagEsquerda = True
+
+    def _setFlags(self, up, down, left, right):
+        self._flagSubir = up
+        self._flagDescer = down
+        self._flagEsquerda = left
+        self._flagDireita = right
+
     # Logica pros bichinhos andarem em qualquer mapa criado desde que ele
     # nao volte pra esquerda nenhuma vez. Ainda vou acabar a ultima parte
     # pro mapa poder voltar ( mapas em espiral )
     def move(self, mapMatrix, rectMap, towerDefense):
+
         rectPosition = self.insideRectPosition(rectMap)
         rectPositionI = rectPosition[0]
         rectPositionJ = rectPosition[1]
@@ -70,9 +88,6 @@ class Enemie(rectangle.Rectangle):
         mapMatrixNextRow = mapMatrix[rectPositionI + 1][rectPositionJ]
         mapMatrixPrevRow = mapMatrix[rectPositionI - 1][rectPositionJ]
         mapMatrixPosition = mapMatrix[rectPositionI][rectPositionJ]
-
-        #print(mapMatrixPrevRow) #TODO
-        #print(mapMatrixNextRow)
 
         if mapMatrixNextColumn == config.Config.MAP_NUMBMATRIX_DESPAWN:
             self.despawn(towerDefense)
@@ -83,46 +98,32 @@ class Enemie(rectangle.Rectangle):
                     self.moveRigth()
                 elif mapMatrixPosition == config.Config.MAP_NUMBMATRIX_CHANGEDIRECTION:
                     if mapMatrixPrevRow == config.Config.MAP_NUMBMATRIX_CENTRALPATH:
-                        self._flagSubir = True
-                        self._flagDescer = False
-                        self._flagDireita = False
-                        self._flagEsquerda = False
+                        self._setFlags(True, False, False, False)
+
                     elif mapMatrixNextRow == config.Config.MAP_NUMBMATRIX_CENTRALPATH:
-                        self._flagDescer = True
-                        self._flagSubir = False
-                        self._flagDireita = False
-                        self._flagEsquerda = False
+                        self._setFlags(False, True, False, False)
+
             elif self._flagDescer:
-                print("OI")
                 if mapMatrixNextRow == config.Config.MAP_NUMBMATRIX_CENTRALPATH \
                         or mapMatrixNextRow == config.Config.MAP_NUMBMATRIX_CHANGEDIRECTION:
                     self.moveDown()
                 elif mapMatrixPosition == config.Config.MAP_NUMBMATRIX_CHANGEDIRECTION:
                     if mapMatrixNextColumn == config.Config.MAP_NUMBMATRIX_CENTRALPATH:
-                        self._flagEsquerda = False
-                        self._flagDireita = True
-                        self._flagDescer = False
-                        self._flagSubir = False
+                        self._setFlags(False, False, False, True)
+
                     elif mapMatrixPrevColumn == config.Config.MAP_NUMBMATRIX_CENTRALPATH:
-                        self._flagEsquerda = True
-                        self._flagDireita = False
-                        self._flagDescer = False
-                        self._flagSubir = False
+                        self._setFlags(False, False, True, False)
+
             elif self._flagSubir:
                 if mapMatrixPrevRow == config.Config.MAP_NUMBMATRIX_CENTRALPATH \
                         or mapMatrixPrevRow == config.Config.MAP_NUMBMATRIX_CHANGEDIRECTION:
                     self.moveUp()
                 elif mapMatrixPosition == config.Config.MAP_NUMBMATRIX_CHANGEDIRECTION:
                     if mapMatrixNextColumn == config.Config.MAP_NUMBMATRIX_CENTRALPATH:
-                        self._flagEsquerda = False
-                        self._flagDireita = True
-                        self._flagDescer = False
-                        self._flagSubir = False
+                        self._setFlags(False, False, False, True)
+
                     elif mapMatrixPrevColumn == config.Config.MAP_NUMBMATRIX_CENTRALPATH:
-                        self._flagEsquerda = True
-                        self._flagDireita = False
-                        self._flagDescer = False
-                        self._flagSubir = False
+                        self._setFlags(False, False, True, False)
 
     def moveRigth(self):
         positionX = self._position[0]
