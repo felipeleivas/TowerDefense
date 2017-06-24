@@ -56,6 +56,11 @@ class TowerDefense:
 
     def squarePosToPixel(self, pos):
         return (config.Config.RECT_DIMX_px * pos[1], config.Config.RECT_DIMY_px * pos[0]) #TODO: @Vinicius, Can you understand why reversed 0 and 1 ?
+                                                                                          #TODO: @Otávio, yes. And you could make this way:
+                                                                                          #return self._rectMap.getMap()[pos[0]][pos[1]][1].getPosition()
+                                                                                          #                                              ^- thats to get the rectangle
+                                                                                          #                                                 on the (pos[0], pos[1]) of
+                                                                                          #                                                 the map.
 
     def getEnemySpawnPosition(self):
         try:
@@ -75,7 +80,7 @@ class TowerDefense:
 
     def getFirstDir(self):
         spawnPosI, spawnPosJ = self.getSpawnPosition()
-
+        print(self.getSpawnPosition())
         if self._matrix[spawnPosI + 1][spawnPosJ] == config.Config.MAP_NUMBMATRIX_CENTRALPATH:
             return 'D'
         elif self._matrix[spawnPosI - 1][spawnPosJ] == config.Config.MAP_NUMBMATRIX_CENTRALPATH:
@@ -408,6 +413,9 @@ class TowerDefense:
         for trapAux in self.getTraps():
             trapAux.decReloadTime()
 
+        for enemieAux in self.getEnemies():
+            enemieAux.executeEffects(self)
+
     #def decTimerDecisegundo(self):
      #   for towerAux in self.getTowers():
       #      towerAux.decReloadTime()
@@ -416,8 +424,7 @@ class TowerDefense:
         return self._timer
 
     def inicializeMatrix(self):
-        f = open("maps/map4.map")
-
+        f = open("maps/map2.map")
         self._matrix = []
         for line in f.readlines():
             self._matrix.append([int(x) for x in line.strip('[]\n').split(',')])

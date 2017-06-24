@@ -18,7 +18,7 @@ class Shot(rectangle.Rectangle):
 
     def calculateDirection(self, targetPosition):
         vector = targetPosition[0] - self._position[0], targetPosition[1] - self._position[1]
-        vector = vector[0] / 5, vector[1] / 5
+        vector = vector[0] / 4, vector[1] / 4
         return vector
 
     def move(self):

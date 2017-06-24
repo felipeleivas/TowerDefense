@@ -2,6 +2,7 @@ import rectangle
 import abc
 import config
 import pygame
+import effects
 
 class Trap(rectangle.Rectangle):
     _mouseCircleSurface = pygame.Surface(config.Config.MOUSE_CIRCLE_SURFACE)
@@ -9,7 +10,7 @@ class Trap(rectangle.Rectangle):
     def __init__(self, position, width, height, image, damage, price):
         super(Trap, self).__init__(position, width, height, image)
         self._damage = damage
-        self._reloadTime = 1
+        self._reloadTime = 2.0
         self._price = price
 
     def getFirstClass(self):
@@ -21,10 +22,6 @@ class Trap(rectangle.Rectangle):
 
     @abc.abstractmethod
     def newCopy(self):
-        return
-
-    @abc.abstractmethod
-    def specialEffect(self):
         return
 
     def getDamage(self):
@@ -43,23 +40,19 @@ class Trap(rectangle.Rectangle):
         self._price = self._price * 2
 
     def decReloadTime(self):
-        self._reloadTime -= 1.0
+        self._reloadTime -= 2.0
 
     def resetReloadTime(self):
-        self._reloadTime = 1.0
-        #print self._reloadTime
+        self._reloadTime = 3
+    #print self._reloadTime
 
     def shotEnemies(self, enemies, towerDefense):
         if self._reloadTime <= 0:
             for enemieAux in enemies:
                 if self.collide(enemieAux):
-                    self.shot(enemieAux, towerDefense)
+                    self.shot(enemieAux)
                     self.resetReloadTime()
                     break
-
-    def shot(self, enemie, towerDefense):
-        print("shot")
-        enemie.hit(self._damage, towerDefense)
 
     def paintRange(self, gameDisplay, color):
         self._mouseCircleSurface.fill(config.Config.CK)
@@ -88,8 +81,9 @@ class FireTrap(Trap):
     def newCopy(self):
         return FireTrap(self._position)
 
-    def specialEffect(self, enemie):
-        enemie.setBurn(3, 3)
+    def shot(self, enemie):
+        burnEffect = effects.BurnEffect(enemie)
+        enemie.setBurn(burnEffect)
 
 
 class FireTrapBuyer(Trap):
@@ -121,6 +115,10 @@ class IceTrap(Trap):
 
     def newCopy(self):
         return IceTrap(self._position)
+
+    def shot(self, enemie):
+        iceEffect = effects.IceEffect(enemie)
+        enemie.setIce(iceEffect)
 
 
 class IceTrapBuyer(Trap):
